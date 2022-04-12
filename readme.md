@@ -36,11 +36,12 @@ cmake -G"Unix Makefiles" ../
 ```
 9. make
 
-# cmake实例
+# CMakeLists.txt示例
 ## 基本操作流程
-1. $> cmake directory
+1. $> cmake -G"Unix Makefiles" directory
 2. $> make
-## cmake示例(CMake的命令全部为大写)
+
+## camke简单示例(CMakeLists.txt)
 ```camke简单示例(CMakeLists.txt)
 cmake_minimum_required(VERSION 3.0)
 
@@ -52,8 +53,8 @@ AUX_SOURCE_DIRECTORY(. SRCS_LIST)  #指定源文件目录
 
 add_executable(${PROJECT_NAME} ${SRCS_LIST}) #添加一个可执行文件构建目标
 ```
-
-````camke多目录示例(CMakeLists.txt)
+## camke多目录示例(CMakeLists.txt)
+```camke多目录示例(CMakeLists.txt)
 cmake_minimum_required(VERSION 3.0)
 
 project(Hello ) #指定工程名
@@ -76,40 +77,6 @@ add_executable(${PROJECT_NAME} ${SRCS_LIST}) #添加一个可执行文件构建�
 # 使用步骤(在build目录下)
 # 1.生成makefile: build> cmake -G "Unix Makefiles" ..\
 # 2.生成目标程序 : build> make
-```
-
-```cmake示例
-#project name  
-PROJECT(test_math)  #指定工程名
-  
-add_definitions("-Wall -lpthread -g")  
-  
-#head file path     #指定头文件目录为include
-INCLUDE_DIRECTORIES( include )  
-  
-#source directory   #指定源文件目录为src，并将其赋值给环境变量DIR_SRCS
-AUX_SOURCE_DIRECTORY(src DIR_SRCS)  
-  
-#set environment variable  #设定环境变量TEST_MATH的值为环境变量DIR_SRCS的值
-SET(TEST_MATH  
-${DIR_SRCS}  
-)  
-  
-#set extern libraries  #将libm.so赋值给环境变量LIBRARIES
-SET(LIBRARIES  
-libm.so  
-)  
-  
-# set output binary path  
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)  
-  
-SET(FS_BUILD_BINARY_PREFIX "Yfs")  
-  
-#add executable file  
-ADD_EXECUTABLE(${FS_BUILD_BINARY_PREFIX}sqrt ${TEST_MATH})  
-  
-#add link library  
-TARGET_LINK_LIBRARIES(${FS_BUILD_BINARY_PREFIX}sqrt ${LIBRARIES})  
 ```
 
 
