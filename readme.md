@@ -40,17 +40,52 @@ cmake -G"Unix Makefiles" ../
 ## 基本操作流程
 1. $> cmake directory
 2. $> make
-## cmake命令(CMake的命令全部为大写)
-```cmake
+## cmake示例(CMake的命令全部为大写)
+```camke简单示例(CMakeLists.txt)
+cmake_minimum_required(VERSION 3.0)
+
+project(Hello) #指定工程名
+
+INCLUDE_DIRECTORIES(include  )  #指定头文件
+
+AUX_SOURCE_DIRECTORY(. SRCS_LIST)  #指定源文件目录
+
+add_executable(${PROJECT_NAME} ${SRCS_LIST}) #添加一个可执行文件构建目标
+```
+
+````camke多目录示例(CMakeLists.txt)
+cmake_minimum_required(VERSION 3.0)
+
+project(Hello ) #指定工程名
+
+add_definitions("-Wall -lpthread -g")  
+
+set(CMAKE_C_STANDARD 11) 
+
+INCLUDE_DIRECTORIES(inc  )  #指定头文件目录
+
+AUX_SOURCE_DIRECTORY(src SRCS_LIST)  #指定源文件目录1
+AUX_SOURCE_DIRECTORY(drv SRCS_LIST)  #指定源文件目录2
+
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)  #设置可执行文件的输出路径
+
+add_executable(${PROJECT_NAME} ${SRCS_LIST}) #添加一个可执行文件构建目标
+
+# file(COPY ${PROJECT_NAME}  DESTINATION ../${PROJECT_NAME}   ) #文件拷贝
+
+# 使用步骤(在build目录下)
+# 1.生成makefile: build> cmake -G "Unix Makefiles" ..\
+# 2.生成目标程序 : build> make
+```
+
+```cmake示例
 #project name  
 PROJECT(test_math)  #指定工程名
   
 add_definitions("-Wall -lpthread -g")  
   
 #head file path     #指定头文件目录为include
-INCLUDE_DIRECTORIES(  
-include  
-)  
+INCLUDE_DIRECTORIES( include )  
   
 #source directory   #指定源文件目录为src，并将其赋值给环境变量DIR_SRCS
 AUX_SOURCE_DIRECTORY(src DIR_SRCS)  
@@ -77,3 +112,12 @@ ADD_EXECUTABLE(${FS_BUILD_BINARY_PREFIX}sqrt ${TEST_MATH})
 TARGET_LINK_LIBRARIES(${FS_BUILD_BINARY_PREFIX}sqrt ${LIBRARIES})  
 ```
 
+
+##
+echo "# cmake_hello" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/canbus/cmake_hello.git
+git push -u origin main
